@@ -23,4 +23,8 @@ class UserPolicy
     {
         return $currentUser->getAttributeValue('id') === $user->getattribute('id');
     }
+
+    public function destroy(User $currentUser, User $user) {
+        return $currentUser->getAttributeValue('is_admin') && $currentUser->getAttributeValue('id') !== $user->getattribute('id');
+    }
 }
