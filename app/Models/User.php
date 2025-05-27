@@ -66,7 +66,10 @@ class User extends Authenticatable
 
     public function feed()
     {
-        return $this->statuses()->latest();
+        //return $this->statuses()->latest();
+        $user_ids = $this->followings()->pluck('user_id')->toArray();
+        array_push($user_ids, $this->getAttributeValue('id'));
+        return Status::whereIn('user_id', $user_ids)->with('user')->latest();
     }
 
     // 获取粉丝列表
