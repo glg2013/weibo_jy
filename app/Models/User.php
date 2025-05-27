@@ -58,4 +58,9 @@ class User extends Authenticatable
         $url = "https://gravatar.loli.net/avatar/";
         return $url . "$hash?s=$size";
     }
+
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
 }
