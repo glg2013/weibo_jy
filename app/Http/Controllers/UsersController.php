@@ -124,4 +124,20 @@ class UsersController extends Controller
         session()->flash('success', '恭喜你，激活成功！');
         return redirect()->route('users.show', [$user]);
     }
+
+    // 获取我正在关注的人的列表
+    public function followings(User $user)
+    {
+        $users = $user->followings()->paginate(10);
+        $title = $user->getAttributeValue('name') . '关注的人';
+        return view('users.show_follow', compact('users', 'title'));
+    }
+
+    public function followers(User $user)
+    {
+        $users = $user->followers()->paginate(10);
+        $title = $user->getAttributeValue('name') . '的粉丝';
+        return view('users.show_follow', compact('users', 'title'));
+    }
+
 }

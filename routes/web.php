@@ -41,3 +41,7 @@ Route::get('password/reset/{token}',  [PasswordController::class, 'showResetForm
 Route::post('password/reset',  [PasswordController::class, 'reset'])->name('password.update');
 
 Route::resource('statuses', StatusesController::class)->only(['store', 'destroy']);
+
+// 社交关系
+Route::get('/users/{user}/followings', [UsersController::class, 'followings'])->name('users.followings');
+Route::get('/users/{user}/followers', [UsersController::class, 'followers'])->name('users.followers');
